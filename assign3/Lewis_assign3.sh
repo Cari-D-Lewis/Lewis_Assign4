@@ -24,3 +24,6 @@ done < number.txt
 #print the array value and the message "files were created!"
 echo ${count[0]} "files were created by Lewis, Cari!"
 echo "P.S. Cari is amazing"
+
+#remove extra files
+rm number.txt ID.txt
