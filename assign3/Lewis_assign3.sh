@@ -3,24 +3,24 @@
 #script that creates a file for each BTS in the BTS_data.txt file named with the BTS ID
 
 #create a file that lists all the unique snake IDs without the ID header
-cut -f 1 BTS_data.txt | grep 13BTS[0-9] | uniq | sort -k1 > ID.txt
+cut -f 1 BTS_data.txt | sort -k1 | uniq | grep 13 > ID.txt
 
-#create an array that names a file for each unique snake and add headers
+#create a loop that names a file for each unique snake, adds headers, and copies the snake records for each
 while read line
 	do touch file_$line.txt
 	head -1 BTS_data.txt >> file_$line.txt
+	grep $line BTS_data.txt >> file_$line.txt
 done < ID.txt
 
-#create an array that reads the lines in the ID.txt file
-snake=0
+#count the number of files created and write it to a new file
+ls file_* | wc -l | grep [[:digit:]] > number.txt
 
-while read file
-	do grep array[$snake]=$file
-	let snake=snake+1
-done < BTS_data.txt
+#assign the value counted in the number.txt file to an array
+file=0
+while read Num
+	do count[$file]=$Num
+done < number.txt
 
-#use the array to copy all the snake data into their respective files
-for ID in ${array[*]}
-	do grep $ID >> file_$ID.txt
-done
-
+#print the array value and the message "files were created!"
+echo ${count[0]} "files were created by Lewis, Cari!"
+echo "P.S. Cari is amazing"
