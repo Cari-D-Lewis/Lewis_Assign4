@@ -7,12 +7,11 @@ ID=($(cut -f 1 BTS_data.txt | sort -k1 | uniq | grep 13))
 
 #create a loop that uses the array to name a file for each snake, adds headers, and copies the snake records for each
 COUNTER=0
-while read line
-	do touch file_${ID[$COUNTER]}.txt
-	head -1 BTS_data.txt >> file_${ID[$COUNTER]}.txt
+while [ $COUNTER -lt ${#ID[@]} ]
+	do head -1 BTS_data.txt > file_${ID[$COUNTER]}.txt
 	grep ${ID[$COUNTER]} BTS_data.txt >> file_${ID[$COUNTER]}.txt
 	let COUNTER=COUNTER+1
-done < BTS_data.txt
+done
 
 #count the number of files created and echo it to the STDOUT
 echo -e "\n\n"${#ID[@]} "files were created by Cari Lewis\n\n\nI friggin' love coding <3 :D\n\n"
