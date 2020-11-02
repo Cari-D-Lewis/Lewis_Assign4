@@ -22,8 +22,11 @@ paste possible_voters.txt new_list.txt > eligible_voters.txt
 TOTAL=$(grep yes eligible_voters.txt | wc -l)
 
 #print the top ten lines of the file to STDOUT and echo the value of TOTAL
-head eligible_voters.txt
+echo -e "\nFirst 10 lines of Original File:\n"
+head possible_voters.txt
 
+echo -e "\nFirst 10 lines of New File\n"
+head eligible_voters.txt
 echo -e "\nThere are $TOTAL eligible voters!!\n"
 
 #remove unnecessary files
